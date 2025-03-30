@@ -1,0 +1,38 @@
+version: 2
+
+models:
+  - name: mart_bus_summary
+    description: "Aggregated summary of bus incidents per month and borough"
+    columns:
+      - name: month
+        description: "Month of the incidents (formatted as YYYY-MM)"
+        tests:
+          - not_null
+      - name: Boro
+        description: "Name of the borough"
+      - name: total_incidents
+        description: "Total number of bus incidents"
+        tests:
+          - not_null
+      - name: avg_students
+        description: "Average number of students on the bus"
+      - name: avg_estimated_delay
+        description: "Average estimated delay in minutes (converted from delay ranges)"
+      - name: avg_temp
+        description: "Average max temperature for that day in °C"
+
+  - name: mart_boro_delay_status
+    description: "Counts of delayed and non-delayed trips per borough"
+    columns:
+      - name: Boro
+        description: "Borough"
+      - name: delay_status
+        description: "Whether the trip was delayed or not"
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['Delayed', 'No Delay']
+      - name: num_trips
+        description: "Total trips for each category"
+        tests:
+          - not_null

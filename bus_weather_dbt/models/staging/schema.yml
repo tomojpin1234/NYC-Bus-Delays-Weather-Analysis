@@ -1,0 +1,25 @@
+version: 2
+
+models:
+  - name: stg_bus_weather_raw
+    description: "Cleaned and loaded bus + weather data from staging table"
+    columns:
+      - name: date
+        description: "Date of incident/weather"
+        tests:
+          - not_null
+
+      - name: Boro
+        description: "NYC borough where the bus breakdown happened"        
+
+      - name: Reason
+        description: "Reason for bus delay"        
+
+      - name: Number_Of_Students_On_The_Bus
+        description: "How many students were on board"
+        tests:
+          - not_null
+
+      - name: How_Long_Delayed
+        description: "Duration of the delay (minutes)"
+        

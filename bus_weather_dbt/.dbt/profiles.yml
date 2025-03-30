@@ -1,0 +1,14 @@
+bus_weather_dbt:
+  outputs:
+    dev:
+      dataset: bus_data
+      job_execution_timeout_seconds: 300
+      job_retries: 1
+      keyfile: "{{ env_var('GOOGLE_APPLICATION_CREDENTIALS') }}"
+      location: us-central1
+      method: service-account
+      priority: interactive
+      project: de-zoomcamp-pipeline-2025
+      threads: 4
+      type: bigquery
+  target: dev

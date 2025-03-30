@@ -1,0 +1,36 @@
+# Byte-compiled / cache
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Jupyter
+.ipynb_checkpoints/
+
+# OS
+.DS_Store
+
+# dbt
+bus_weather_dbt/target/
+bus_weather_dbt/dbt_modules/
+bus_weather_dbt/logs/
+bus_weather_dbt/.dbt/.user.yml
+
+# Airflow logs and PIDs
+airflow/logs/
+airflow/airflow-webserver.pid
+
+# GCP credentials
+credentials/*.json
+
+# Parquet/CSV or local data artifacts
+*.parquet
+*.csv
+data/*
+
+# Logs
+logs/
+
+# Terraform
+terraform/.terraform/
+terraform/terraform.tfstate
+terraform/terraform.tfstate.backup
