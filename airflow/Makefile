@@ -1,8 +1,12 @@
 PROJECT_NAME=airflow
 DAG_ID=bus_weather_pipeline
-COMPOSE=docker compose
+COMPOSE = $(shell command -v docker-compose >/dev/null 2>&1 && echo docker-compose || echo docker compose)
+
+.PHONY: init up down restart rebuild logs trigger list-dags dag-state dag-test bash scheduler-restart webserver-restart
 
 init:
+	mkdir -p logs
+	mkdir -p plugins	
 	$(COMPOSE) down -v
 	$(COMPOSE) build
 	$(COMPOSE) up airflow-init
@@ -21,7 +25,7 @@ rebuild:
 	$(COMPOSE) down -v
 	$(COMPOSE) build
 	$(COMPOSE) up airflow-init
-	$(COMPOSE) up 
+	$(COMPOSE) up -d
 
 logs:
 	$(COMPOSE) logs -f

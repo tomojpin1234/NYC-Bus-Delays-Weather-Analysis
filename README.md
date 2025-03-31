@@ -104,7 +104,7 @@ Technologies Used:
   - See [GCP.md](./GCP.md) for GCP setup instructions (manual + CLI + Terraform).
 - Python 3.10+
 - Docker & Docker Compose
-- [Poetry](https://python-poetry.org/docs/#installation)
+- [Poetry](https://python-poetry.org/docs/#installation) - [check how to install](#install-poetry)
 - [Terraform](https://developer.hashicorp.com/terraform/install)
 - [gcloud CLI](https://cloud.google.com/sdk/docs/install) (optional)
 - `make` - [check how to install](#install-make)
@@ -115,11 +115,11 @@ Technologies Used:
 
 ```bash
 # 1. Clone the repo
-git clone git@github.com:tomojpin1234/NYC-Bus-Delays-Weather-Analysis.git
+git clone https://github.com/tomojpin1234/NYC-Bus-Delays-Weather-Analysis.git
 cd NYC-Bus-Delays-Weather-Analysis
 
-# 2. Install dependencies
-make setup
+# 2. Initial setup
+make init
 
 # 3. Setup GCP (next steps require GCP) more in GCP.md
 
@@ -128,19 +128,30 @@ make tf-init
 make tf-apply
 
 # 5. Build and run Airflow
-make airflow-rebuild
-make airflow-up
-make airflow-trigger  # trigger the DAG
+make airflow-init
+make airflow-up         
+# wait ~30s and open the browser - this will mean the airflow is ready
+make airflow-trigger    # trigger the DAG
+# check the pipeline in Airflow UI
 
-# 6. (Optional) Run dbt manually
+# 6. (Optional) Install dependencies
+make setup
+
+# 7. (Optional) Run dbt manually
 make dbt-run-full
 make dbt-test
+
+# Note: the flow was tested on macOS with Intel and Apple silicon
 ```
 
 > The full pipeline can be triggered from the Airflow UI at `http://localhost:8080` Username: airflow, password: airflow
+> Once triggered, Airflow UI should look like this
+![Airflow Preview](images/airflow.png)
 
 ## ✅ Reproducibility
+
 Use the `Makefile` to run everything:
+
 ```bash
 make airflow-up         # Start Airflow
 make airflow-trigger    # Trigger pipeline
@@ -201,3 +212,15 @@ After installation, you can verify that make is accessible by running:
 See [`GCP.md`](./GCP.md) for:
 - Manual setup via Google Cloud Console UI
 - Automated setup via `gcloud` CLI commands + `terraform`        
+
+
+#### Install Poetry
+To install or update Poetry to the latest version, run:
+
+```bash
+curl -sSL https://install.python-poetry.org | python3 -
+poetry --version
+```
+
+After installation, verify the Poetry version:
+This project requires **Poetry 2.0.0 or later**.

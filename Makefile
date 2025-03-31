@@ -125,8 +125,11 @@ clean:
 	# rm -rf $(DBT_DIR)/target $(DBT_DIR)/dbt_packages
 	rm -rf data/*
 
+init:
+	mkdir -p data
+
 setup:
-	poetry install
+	poetry install --no-root
 
 help:
 	@echo "Common Make targets:"
